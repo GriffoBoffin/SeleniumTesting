@@ -11,9 +11,7 @@ import pom.RegisterPage;
 
 import static stepdefinition.Hooks.driver;
 
-
 public class RegisterSteps {
-
     RegisterPage registerPage = new RegisterPage(driver);
 
     @Given("Be on register page")
@@ -38,9 +36,7 @@ public class RegisterSteps {
 
     @And("Select day of birth {string}")
     public void selectDayOfBirth(String day) {
-
         registerPage.selectDayOfBirth(day);
-        // Assert.assertEquals(32,registerPage.);
     }
 
     @And("Select month of birth {string}")
@@ -62,7 +58,6 @@ public class RegisterSteps {
     public void insertCompanyName(String company) {
         registerPage.insertCompanyName(company);
     }
-
 
     @And("Select newsletter checkbox")
     public void selectNewsletterCheckbox() {

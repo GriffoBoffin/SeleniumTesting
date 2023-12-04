@@ -1,11 +1,15 @@
 package pom;
 
-import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+
+import java.text.ParseException;
+
 
 public class LoginPage {
     public static String url = "https://demo.nopcommerce.com/login?returnUrl=%2F";
+    private final WebDriver driver;
     By rememberMeCheckbox = By.id("RememberMe");
     // Selectori
     By homepageButton = By.cssSelector("[alt=\"nopCommerce demo store\"]");
@@ -16,29 +20,23 @@ public class LoginPage {
     By loginButton = By.cssSelector("[class=\"button-1 login-button\"]");
     By signInRegisterButton = By.cssSelector("[class=\"button-1 register-button\"]");
     By forgotPassword = By.cssSelector("[href=\"/passwordrecovery\"]");
-
     By noCustomerAccountAndIncorrectCredentialsMessage = By.cssSelector("[class=\"message-error validation-summary-errors\"]");
     By enterEmailMessage = By.id("Email-error");
-
-
-    private WebDriver driver;
 
     // Constructor
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
-
     // Verificari
 
-    public boolean homepageButtonisDisplayed(){
+    public boolean homepageButtonisDisplayed() {
         return driver.findElement(homepageButton).isDisplayed();
     }
 
-    public boolean welcomeTitleisDisplayed(){
+    public boolean welcomeTitleisDisplayed() {
         return driver.findElement(welcomeTitle).isDisplayed();
     }
-
 
     // Actiuni
 
@@ -71,7 +69,6 @@ public class LoginPage {
         return driver.findElement(noCustomerAccountAndIncorrectCredentialsMessage).getText();
     }
 
-
     public String emailErrorIsPressent() {
         return driver.findElement(enterEmailMessage).getText();
     }
@@ -83,5 +80,10 @@ public class LoginPage {
     public void enterWrongEmail(String emailu) {
         driver.findElement(loginEmail).sendKeys(emailu);
         driver.findElement(loginPassword).click();
+    }
+
+    public void cookieTest() {
+        driver.manage().addCookie(new Cookie(".Nop.Vasilica", "Cfqwhu5uaKnQA8KclLl5A"));
+        driver.navigate().refresh();
     }
 }

@@ -2,9 +2,14 @@ package pom;
 
 import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegisterPage {
 
@@ -58,7 +63,6 @@ public class RegisterPage {
     public void selectDayOfBirth(String day) {
         WebElement selectElement = driver.findElement(dayOfBirth);
         Select dayDropdown = new Select(selectElement);
-
         dayDropdown.selectByValue(day);
     }
 
@@ -130,3 +134,4 @@ public class RegisterPage {
         return driver.findElement(confirmPasswordError).getText();
     }
 }
+

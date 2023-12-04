@@ -8,13 +8,15 @@ import pom.HomePage;
 import pom.LoginPage;
 import pom.RegisterPage;
 
+import java.text.ParseException;
+import java.util.List;
+
 import static stepdefinition.Hooks.driver;
 
 public class LogInSteps {
     LoginPage loginPage = new LoginPage(driver);
     HomePage homePage = new HomePage(driver);
     RegisterPage registerPage = new RegisterPage(driver);
-
 
     @Given("Be on login page")
     public void beOnLoginPage() {
@@ -47,17 +49,14 @@ public class LogInSteps {
 
     @Then("Logout button is displayed")
     public void logoutButtonIsDisplayed() {
-
         homePage.logoutButtonIsDisplayed();
         Assert.assertTrue(homePage.logoutButtonIsDisplayed());
     }
-
 
     @Then("No customer account message is displayed")
     public void noCustomerAccountMessageIsDisplayed() {
         Assert.assertEquals("Login was unsuccessful. Please correct the errors and try again.\n" +
                 "No customer account found", loginPage.noCustomerAccountMessageAndIncorrectCredentialsIsPressent());
-
     }
 
     @Then("Incorrect credentials message is displayed")
@@ -81,7 +80,6 @@ public class LogInSteps {
         Assert.assertEquals(driver.getCurrentUrl(), registerPage.url);
     }
 
-
     @When("Enter wrong email format {string}")
     public void enterWrongEmailFormat(String email) {
         loginPage.enterWrongEmail(email);
@@ -90,6 +88,17 @@ public class LogInSteps {
     @Then("Wrong email error is displayed at login")
     public void wrongEmailErrorIsDisplayed() {
         Assert.assertEquals("Wrong email", loginPage.emailErrorIsPressent());
+    }
 
+    @When("Enter cookie")
+    public void enterCookie() throws ParseException, InterruptedException {
+        loginPage.cookieTest();
+    }
+
+    @When("Enter credentials from list and login")
+    public void enterCredentialsFromListAndLogin(List<String> credentials) {
+        loginPage.enterEmail(credentials.get(0));
+        loginPage.enterPassword(credentials.get(1));
+        loginPage.clickLogin();
     }
 }
